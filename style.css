@@ -1,0 +1,200 @@
+@import url(https://fonts.googleapis.com/css?family=Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic);
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+*:focus{
+    outline: none;
+}
+
+body{
+    background:#f2f2f2;
+    font-family: 'Poppins', sans-serif;
+}
+.header{
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.title {
+    position: relative; /* Set the position to relative */
+    display: inline-block; /* Make the title inline-block to contain the line */
+}
+
+.title::after {
+    content: '';
+    position: absolute; /* Set the position to absolute */
+    bottom: -5px; /* Adjust the position of the line */
+    left: 0;
+    width: 100%; /* Set the initial width to cover the entire width of the title */
+    height: 2px; /* Set the height of the line */
+    background-color: #6625b6; /* Set the color of the line */
+    animation: lineAnimation 2s infinite alternate; /* Apply the animation */
+}
+
+@keyframes lineAnimation {
+    0% {
+        width: 100%; /* Start with full width */
+        left: 0; /* Start from left */
+    }
+    25% {
+        width: 50%; /* Shrink to half width */
+        left: 25%; /* Move towards center from left */
+    }
+    75% {
+        width: 50%; /* Maintain half width */
+        left: 25%; /* Maintain position at center */
+    }
+    100% {
+        width: 100%; /* Return to full width */
+        left: 0; /* Return to original position */
+    }
+}
+
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive grid columns */
+    gap: 20px; /* Adjust the gap between grid items */
+    margin: 0 auto; /* Center the grid */
+    max-width: 1200px; /* Limit the maximum width of the grid */
+    padding: 0 20px; /* Add padding to the sides */
+}
+
+.gallery-image {
+    margin: 0; /* Remove the initial margin */
+}
+
+/* Media queries for different screen sizes */
+@media screen and (max-width: 768px) {
+    .gallery {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Adjust columns for smaller screens */
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .gallery {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Adjust columns for even smaller screens */
+    }
+}
+
+
+
+.image{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.5s ease;
+}
+.image:hover{
+    opacity: 0.7;
+}
+
+/* popup */
+
+.popup{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    width: 80%;
+    max-width: 1600px;
+    height: 90vh;
+    max-height: 800px;
+    border-radius: 20px;
+    background: rgba(0, 0, 0, 0.75);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 5;
+    overflow: hidden;
+    transition: 1s;
+    opacity: 0;
+}
+
+.popup.active{
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+}
+
+.popup.active .close-btn,
+.popup.active .image-name,
+.popup.active .index,
+.popup.active .large-image,
+.popup.active .arrow-btn{
+    opacity: 1;
+    transition: opacity .5s;
+    transition-delay: 1s;
+}
+
+.top-bar{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background: #000;
+    color: #fff;
+    text-align: center;
+    line-height: 50px;
+    font-weight: 300;
+}
+
+.image-name{
+    opacity: 0;
+}
+
+.close-btn{
+    opacity: 0;
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.arrow-btn{
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 10px;
+    border-radius: 50%;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.left-arrow{
+    left: 10px;
+}
+
+.right-arrow{
+    right: 10px;
+    transform: translateY(-50%) rotate(180deg);
+}
+
+.arrow-btn:hover{
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.index{
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    font-size: 80px;
+    font-weight: 100;
+    color: rgba(255, 255, 255, 0.4);
+    opacity: 0;
+}
+
+.large-image{
+    margin-top: 5%;
+    width: 80%;
+    height: 80%;
+    object-fit: contain;
+    opacity: 0;
+}
